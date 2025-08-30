@@ -39,9 +39,12 @@ function renderLinks(links) {
 }
 
 function generateQRCode() {
-    // QRコード生成（デスクトップとタブレットのみ）
-    if (window.innerWidth > 768 && typeof QRCode !== 'undefined') {
-        const qrContainer = document.getElementById('qrcode');
+    // QRコード生成（全画面サイズ対応）
+    if (typeof QRCode !== 'undefined') {
+        const isMobile = window.innerWidth <= 768;
+        const qrContainerId = isMobile ? 'qrcode-mobile' : 'qrcode-desktop';
+        const qrContainer = document.getElementById(qrContainerId);
+        
         if (qrContainer) {
             // 既存のQRコードをクリア
             qrContainer.innerHTML = '';
@@ -104,19 +107,11 @@ function init() {
 // DOMが読み込まれたら初期化
 document.addEventListener('DOMContentLoaded', init);
 
-// ウィンドウリサイズ時にQRコードの表示/非表示を切り替え
+// ウィンドウリサイズ時にQRコードを再生成
 window.addEventListener('resize', function() {
-    const qrContainer = document.querySelector('.qr-container');
-    if (qrContainer) {
-        if (window.innerWidth <= 768) {
-            qrContainer.style.display = 'none';
-        } else {
-            qrContainer.style.display = 'block';
-            // QRコードが生成されていない場合は再生成
-            const qrcode = document.getElementById('qrcode');
-            if (qrcode && !qrcode.querySelector('canvas') && !qrcode.querySelector('img')) {
-                generateQRCode();
-            }
-        }
-    }
+    // デバウンス処理
+    clearTimeout(window.qrResizeTimer);
+    window.qrResizeTimer = setTimeout(function() {
+        generateQRCode();
+    }, 300);
 });

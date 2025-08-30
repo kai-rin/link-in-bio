@@ -34,12 +34,20 @@
         <main class="links">
             <!-- リンクボタンはJavaScriptで動的に生成されます -->
         </main>
+        
+        <!-- QRコードコンテナ（モバイル用） -->
+        <div class="qr-container-mobile">
+            <div class="qr-wrapper">
+                <div id="qrcode-mobile"></div>
+                <p class="qr-text">モバイルで表示</p>
+            </div>
+        </div>
     </div>
     
-    <!-- QRコードコンテナ -->
-    <div class="qr-container">
+    <!-- QRコードコンテナ（デスクトップ用） -->
+    <div class="qr-container-desktop">
         <div class="qr-wrapper">
-            <div id="qrcode"></div>
+            <div id="qrcode-desktop"></div>
             <p class="qr-text">モバイルで表示</p>
         </div>
     </div>

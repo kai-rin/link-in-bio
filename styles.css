@@ -147,15 +147,7 @@ body {
     }
 }
 
-/* QRコードコンテナ */
-.qr-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
+/* QRコード共通スタイル */
 .qr-wrapper {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
@@ -168,7 +160,8 @@ body {
     gap: 8px;
 }
 
-#qrcode {
+#qrcode-mobile,
+#qrcode-desktop {
     background: transparent;
     padding: 8px;
     border-radius: 8px;
@@ -177,8 +170,10 @@ body {
     justify-content: center;
 }
 
-#qrcode canvas,
-#qrcode img {
+#qrcode-mobile canvas,
+#qrcode-mobile img,
+#qrcode-desktop canvas,
+#qrcode-desktop img {
     filter: invert(1);
 }
 
@@ -191,26 +186,54 @@ body {
     white-space: nowrap;
 }
 
-/* モバイルでQRコードを非表示 */
+/* モバイル用QRコードコンテナ */
+.qr-container-mobile {
+    display: none;
+    margin: 32px auto 0;
+    width: 100%;
+}
+
+/* デスクトップ用QRコードコンテナ */
+.qr-container-desktop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* モバイルでモバイル用QRコードを表示 */
 @media (max-width: 768px) {
-    .qr-container {
+    .qr-container-mobile {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .qr-container-desktop {
         display: none;
     }
 }
 
-/* タブレット以上でQRコードサイズ調整 */
+/* タブレット以上でデスクトップ用QRコードを表示 */
+@media (min-width: 769px) {
+    .qr-container-mobile {
+        display: none;
+    }
+    
+    .qr-container-desktop {
+        display: block;
+    }
+}
+
+/* タブレットでQRコードサイズ調整 */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .qr-container {
+    .qr-container-desktop {
         bottom: 15px;
         right: 15px;
     }
     
     .qr-wrapper {
         padding: 12px;
-    }
-    
-    #qrcode {
-        padding: 6px;
     }
     
     .qr-text {
