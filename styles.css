@@ -157,10 +157,11 @@ body {
 }
 
 .qr-wrapper {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -168,7 +169,7 @@ body {
 }
 
 #qrcode {
-    background: white;
+    background: transparent;
     padding: 8px;
     border-radius: 8px;
     display: flex;
@@ -176,8 +177,13 @@ body {
     justify-content: center;
 }
 
+#qrcode canvas,
+#qrcode img {
+    filter: invert(1);
+}
+
 .qr-text {
-    color: #000;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 12px;
     font-weight: 600;
     text-align: center;
@@ -212,12 +218,8 @@ body {
     }
 }
 
-/* デスクトップでホバーエフェクト */
+/* デスクトップ表示 */
 @media (min-width: 1025px) {
-    .qr-container:hover {
-        transform: scale(1.05);
-    }
-    
     .qr-wrapper {
         cursor: default;
     }
