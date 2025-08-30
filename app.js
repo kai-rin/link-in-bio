@@ -38,6 +38,27 @@ function renderLinks(links) {
     });
 }
 
+function generateQRCode() {
+    // QRコード生成（デスクトップとタブレットのみ）
+    if (window.innerWidth > 768 && typeof QRCode !== 'undefined') {
+        const qrContainer = document.getElementById('qrcode');
+        if (qrContainer) {
+            // 既存のQRコードをクリア
+            qrContainer.innerHTML = '';
+            
+            // QRコード生成
+            new QRCode(qrContainer, {
+                text: 'https://kai-rin.github.io/link-in-bio/',
+                width: 128,
+                height: 128,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    }
+}
+
 function init() {
     // 必要な設定が読み込まれているか確認
     if (typeof CONFIG === 'undefined') {
@@ -75,7 +96,27 @@ function init() {
     if (CONFIG.links) {
         renderLinks(CONFIG.links);
     }
+    
+    // QRコード生成
+    generateQRCode();
 }
 
 // DOMが読み込まれたら初期化
 document.addEventListener('DOMContentLoaded', init);
+
+// ウィンドウリサイズ時にQRコードの表示/非表示を切り替え
+window.addEventListener('resize', function() {
+    const qrContainer = document.querySelector('.qr-container');
+    if (qrContainer) {
+        if (window.innerWidth <= 768) {
+            qrContainer.style.display = 'none';
+        } else {
+            qrContainer.style.display = 'block';
+            // QRコードが生成されていない場合は再生成
+            const qrcode = document.getElementById('qrcode');
+            if (qrcode && !qrcode.querySelector('canvas') && !qrcode.querySelector('img')) {
+                generateQRCode();
+            }
+        }
+    }
+});

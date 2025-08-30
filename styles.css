@@ -147,6 +147,82 @@ body {
     }
 }
 
+/* QRコードコンテナ */
+.qr-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.qr-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#qrcode {
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-text {
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* モバイルでQRコードを非表示 */
+@media (max-width: 768px) {
+    .qr-container {
+        display: none;
+    }
+}
+
+/* タブレット以上でQRコードサイズ調整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .qr-container {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .qr-wrapper {
+        padding: 12px;
+    }
+    
+    #qrcode {
+        padding: 6px;
+    }
+    
+    .qr-text {
+        font-size: 11px;
+    }
+}
+
+/* デスクトップでホバーエフェクト */
+@media (min-width: 1025px) {
+    .qr-container:hover {
+        transform: scale(1.05);
+    }
+    
+    .qr-wrapper {
+        cursor: default;
+    }
+}
+
 @media (min-width: 641px) {
     body {
         align-items: center;
