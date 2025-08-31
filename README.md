@@ -13,10 +13,11 @@ GitHub Pagesでホストするシンプルなリンクページです。ダー�
 
 - `index.html` - メインHTML（編集不要）
 - `config.js` - **リンク設定ファイル（これを編集）**
+- `icons.js` - アイコン設定ファイル
 - `app.js` - JavaScript（動的レンダリング処理）
 - `styles.css` - スタイルシート
 - `profile.svg` - デフォルトプロフィール画像
-- `favicon.svg` - ファビコン
+- `favicon.ico` - ファビコン
 
 ## リンクの追加・編集
 
