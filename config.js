@@ -39,6 +39,12 @@ const CONFIG = {
       enabled: true
     },
     {
+      title: "Zenn",
+      url: "https://zenn.dev/kairininja",
+      icon: "zenn",
+      enabled: true
+    },
+    {
       title: "カクヨム",
       url: "https://kakuyomu.jp/users/Kairin-Ninja",
       icon: "kakuyomu",
